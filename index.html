@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Metodo</title>
+</head>
+
+<body>
+    <script>
+        var entradas = parseInt(prompt("Numero de saidas geradas?"));
+
+        while (entradas.textContent == 0) {
+            entradas = parseInt(prompt("Numero de saidas geradas? (Número > 0)"));
+        }
+
+        var seeds = new Array(entradas);
+
+        seeds[0] = 0;
+
+        var semente = prompt("Inserir semente? Ex: 1234 (4 digítos)");
+
+        while (semente.length < 4) {
+            semente = prompt("Inserir semente? Ex: 1234 (4 digítos)");
+        }
+
+        seeds[0] = semente;
+
+        if (seeds[0] != 0) {
+            gerarSeeds(seeds);
+        } else {
+            for (var i = 0; i < entradas; i++) {
+                var k = new Date().getTime();
+                var z = k.toString();
+                z = z.substring(z.length - 4);
+                seeds[i] = parseInt(z);
+                alert("gerando seed " + (i + 1));
+            }
+        }
+        console.log("SEEDS: " + seeds);
+        mostrarValores(seeds);
+
+        function midsquare(x) {
+            var y = x ** 2;
+            var z = y.toString();
+            z = z.substring(2, 6);
+            return parseInt(z);
+        }
+
+        function gerarSeeds(seeds) {
+            for (var i = 1; i < seeds.length; i++) {
+                seeds[i] = midsquare(seeds[i - 1]);
+            }
+        }
+
+        function mostrarValores(seeds) {
+            for (var i = 0; i < seeds.length; i++) {
+                console.log(midsquare(seeds[i]));
+            }
+        }
+    </script>
+</body>
+
+</html>
